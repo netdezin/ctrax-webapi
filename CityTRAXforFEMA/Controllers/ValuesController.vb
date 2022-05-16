@@ -1,12 +1,14 @@
 ﻿Imports System.Net
 Imports System.Web.Http
+Imports System.Net.Http
 
 Public Class ValuesController
     Inherits ApiController
 
     ' GET api/values
-    Public Function GetValues() As IEnumerable(Of String)
-        Return New String() {"value1", "value2"}
+    Public Function [Get]() As HttpResponseMessage
+        Dim retVal = New With {Key .key1 = "value1", Key .key2 = "value2"}
+        Return Request.CreateResponse(HttpStatusCode.OK, retVal)
     End Function
 
     ' GET api/values/5

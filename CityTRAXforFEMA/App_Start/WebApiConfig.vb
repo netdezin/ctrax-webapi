@@ -2,6 +2,8 @@
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Web.Http
+Imports System.Net.Http.Headers
+Imports System.Web.Http.Cors
 
 Public Module WebApiConfig
     Public Sub Register(ByVal config As HttpConfiguration)
@@ -15,5 +17,10 @@ Public Module WebApiConfig
             routeTemplate:="api/{controller}/{id}",
             defaults:=New With {.id = RouteParameter.Optional}
         )
+
+        config.Formatters.JsonFormatter.SupportedMediaTypes.Add(New MediaTypeHeaderValue("text/html"))
+
+        config.EnableCors(New EnableCorsAttribute("*", "*", "*"))
+
     End Sub
 End Module
